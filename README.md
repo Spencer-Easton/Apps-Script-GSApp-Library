@@ -17,7 +17,7 @@ You can cotact me on google+ at:
 7) Enable any APIs you need this service account to access  
 
 ##### Prepare your Service Account Key  
-1) Copy the contents of the JSON key and paste it into your scripts properties. Name the property as desired. In the example case I use `jsonKey`.    
+1) Copy the contents of the JSON key and paste it into your scripts properties. Name the property as desired. In the example case I use `jsonKey`. It is a very bad practice to leave your key in your source code.  
 2) When you need access, use the following command:  
 
     var jsonKey = JSON.parse(PropertiesService.getScriptProperties().getProperty("jsonKey"));  
@@ -27,6 +27,7 @@ You can cotact me on google+ at:
 
   
 ##### Authorize the service account for your google domain  
+If you are going to use the service account to request Oauth2 tokens for users in you domain do the following:  
  1) Launch admin.google.com as a domain admin  
  2) Open Security settings  
  3) Choose advanced settings  
