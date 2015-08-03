@@ -42,9 +42,9 @@ You can either either use the code from this repo directly in your project or in
     
     /*  
     * Constructor for the GSApp Library. Use this to initialize a GSApp object.   
-    * @param {String} rsaKey The private_key from your service account JSON ke  
+    * @param {String} rsaKey The private_key from your service account JSON key  
     * @param {Array} Scopes An Array of scopes you want to authenticate    
-    * @param {String} saEmail The service account Email  
+    * @param {String} saEmail The client_email from your service account JSON key    
     * @return {object} self for chaining  
     */  
     function init(string RSAKey, array Scopes, string ServiceAccountEmail)   
@@ -66,7 +66,7 @@ You can either either use the code from this repo directly in your project or in
     
     /*  
     * Removes a user from GSApp.    
-    * @param {String} userEmail The Email account of the user for whom you are requesting the token  
+    * @param {String} userEmail The Email account of the user you want to remove.    
     * @return {object} self for chaining  
     *\  
     function removeUser(string userEmail)   
@@ -78,7 +78,7 @@ You can either either use the code from this repo directly in your project or in
     function removeUsers()   
     
     /*  
-    * Requests an Oauth token for each user added.
+    * Requests an Oauth token for each user added. Saves it in the GSApp object.  
     * @return {object} self for chaining  
     *\  
     function requestToken()   
