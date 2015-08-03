@@ -3,7 +3,7 @@ Google Service Account Library for Apps Script
 
 This is an improved version of my Google service account library for Google Apps Script. This makes use of the new Utilities.computeRsaSha256Signature(value, key).  I've added the ability to batch request tokens for users in your domain. If you need to request a token for your script itself add the client_email as a user.  You can add the library with the project Id: `MJ5317VIFJyKpi9HCkXOfS0MLm9v2IJHf` or add from GSApp.gs found in this repo. 
 
-You can cotact me on google+ at:  
+You can contact me on google+ at:  
 [Spencer Easton](https://plus.google.com/+SpencerEastonCCS)  
 
 #### Using this Library  
@@ -42,7 +42,7 @@ You can either either use the code from this repo directly in your project or in
     
     /*  
     * Constructor for the GSApp Library. Use this to initialize a GSApp object.   
-    * @param {String} rsaKey Your private RSA key in PEM64  
+    * @param {String} rsaKey The private_key from your service account JSON ke  
     * @param {Array} Scopes An Array of scopes you want to authenticate    
     * @param {String} saEmail The service account Email  
     * @return {object} self for chaining  
