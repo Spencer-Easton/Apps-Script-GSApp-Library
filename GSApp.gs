@@ -56,7 +56,7 @@ function init(rsaKey, Scopes, saEmail){
     return self;
   }
   
-  self.generateJWT = function(){
+  self.generateJWT_ = function(){
     var sResult="",claim="";
     
     if(!subAccounts_){
@@ -98,7 +98,11 @@ function init(rsaKey, Scopes, saEmail){
     return tokens_;
   }
   
+  
+  
+  
   self.requestToken = function(){
+    self.generateJWT_();
     if(!jwts_){
       throw 'You must run generateJWT'
     }
@@ -152,6 +156,9 @@ function init(rsaKey, Scopes, saEmail){
           "iat": now,
           "exp": exp
         };
+    if(subAccount === saEmail_){
+      delete claim.sub;
+    }
     return claim;
   }
   return self;
