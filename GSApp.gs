@@ -57,32 +57,21 @@ function init(rsaKey, Scopes, saEmail){
   }
   
   self.generateJWT_ = function(){
-    var sResult="",claim="";
+    var sResult="",
+        claim="",
+        JWTs = {},
+        header = Utilities.base64Encode('{"alg":"RS256","typ":"JWT"}');
     
     if(!subAccounts_){
       throw new Error("You must add at least one user account");
     }
-    var sPayloads = [];
-    var header = Utilities.base64Encode('{"alg":"RS256","typ":"JWT"}');
     
-    for(var i=0; i<subAccounts_.length; i++){
-      sPayloads.push({"claim":header+"."+Utilities.base64Encode(JSON.stringify(makeClaim(subAccounts_[i]))),"user":subAccounts_[i],"expire":expireTime_});
-    } 
-    
-    
-    try {
-      var JWTs = {};
-      
-      for(var i=0; i < sPayloads.length; i++){
-        
-        JWTs[sPayloads[i].user]={"signedClaim": sPayloads[i].claim +"."+ Utilities.base64Encode(Utilities.computeRsaSha256Signature(sPayloads[i].claim, rsaKey_)),
-                                 "expire":sPayloads[i].expire};
-      }
-      jwts_ = JWTs;
-      
-    } catch (ex) {
-      throw new Error("Error generating JWT: " + ex);
+    for(var i=0; i < subAccounts_.length; i++){
+      claim = header+"."+Utilities.base64Encode(JSON.stringify(makeClaim(subAccounts_[i])));
+      JWTs[subAccounts_[i]]={"signedClaim": claim +"."+ Utilities.base64Encode(Utilities.computeRsaSha256Signature(claim, rsaKey_)),
+                             "expire":expireTime_};
     }
+    jwts_ = JWTs;
     return self;
   } 
   
