@@ -1,11 +1,17 @@
-/**
-* GAS library for generating user OAuth Tokens via Google service account. see 
+/*
+* GAS library for generating user OAuth Tokens via Google service account.
 * @param {String} rsaKey The private_key from your service account JSON key
 * @param {Array} Scopes An Array of scopes you want to authenticate
 * @param {String} saEmail The service account Email
 * @return {object} self for chaining
 */
 function init(rsaKey, Scopes, saEmail){
+  return new saService_(rsaKey,Scopes,saEmail);
+}
+
+
+function saService_(rsaKey, Scopes, saEmail){
+
   var self = this;
   var rsaKey_ = rsaKey;
   var Scopes_ = Scopes;
@@ -123,8 +129,7 @@ function init(rsaKey, Scopes, saEmail){
         }
       }
       
-      if(response.access_token)
-      {
+      if(response.access_token){
         tokens_[user]={};
         tokens_[user].token = response.access_token;
         tokens_[user].expire = jwts_[user].expire;
@@ -132,6 +137,18 @@ function init(rsaKey, Scopes, saEmail){
     }
     return self;
   }
+  
+  
+  self.tokenService = function(email){
+      return function(){
+        var token = self.getToken(email);
+        if(token.expire<(Date.now()/1000).toString().substr(0,10)){
+          self.requestToken()
+        }
+        return self.getToken(email).token;
+      }
+    }
+  
   function makeClaim(subAccount){
     var now = (Date.now()/1000).toString().substr(0,10);
     var exp = (parseInt(now) + 3600).toString().substr(0,10);
@@ -152,3 +169,4 @@ function init(rsaKey, Scopes, saEmail){
   }
   return self;
 }
+
