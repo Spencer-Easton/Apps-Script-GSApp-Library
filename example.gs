@@ -6,7 +6,7 @@ function example(){
   var clientEmail = jsonKey.client_email;
   
   //example how to request OAuth2 tokens of your domain users
-  var userTokens = new GSApp.init(key, ['https://www.googleapis.com/auth/drive'], clientEmail);
+  var userTokens = GSApp.init(key, ['https://www.googleapis.com/auth/drive'], clientEmail);
   userTokens.addUser("1test@example.com")
             .addUser("1test@example.com") //add multiple users to batch process
             .removeUsers()                //remove all users
