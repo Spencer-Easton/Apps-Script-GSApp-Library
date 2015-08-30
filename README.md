@@ -95,5 +95,12 @@ You can either either use the code from this repo directly in your project or in
     * @return {object} {user:{token,expire} , user:{token:expire} , ... }   
     *\  
     function getTokens()  
+      
+    /*  
+    * returns a function that can be invoked to get a fresh token 
+    * @param {String} userEmail The email account of the user you want  
+    * @return {function}     
+    *\  
+    function tokenService(email)  
   
   
